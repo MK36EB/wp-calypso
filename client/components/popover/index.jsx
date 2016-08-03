@@ -243,7 +243,11 @@ class Popover extends Component {
 			return null;
 		}
 
-		const suggestedPosition = suggestPosition( position, domContainer, domContext );
+		let suggestedPosition = position;
+
+		if ( this.props.autoPosition ) {
+			suggestedPosition = suggestPosition( position, domContainer, domContext );
+		}
 
 		this.debug( 'suggested position: %o', suggestedPosition );
 
@@ -365,6 +369,7 @@ class Popover extends Component {
 }
 
 Popover.propTypes = {
+	autoPosition: PropTypes.bool,
 	className: PropTypes.string,
 	closeOnEsc: PropTypes.bool,
 	id: PropTypes.string,
@@ -376,6 +381,7 @@ Popover.propTypes = {
 };
 
 Popover.defaultProps = {
+	autoPosition: true,
 	className: 'popover__container',
 	closeOnEsc: true,
 	isVisible: false,
